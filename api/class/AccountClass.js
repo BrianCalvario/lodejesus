@@ -36,14 +36,12 @@ class ManagerAccount{
             await AccountModel.findByIdAndUpdate(id,{
                 $set:{
                     balance:this.balance
-                }
-                
+                }        
             });
             return "Ok";
         } catch (error) {
             throw new Error(`Error al agregar monto: ${error}`);    
         }
-
     }
 
     async restBalnce(id, amount){
@@ -53,7 +51,6 @@ class ManagerAccount{
                 $set:{
                     balance:this.balance
                 }
-                
             });
             return "Ok";
         } catch (error) {
@@ -64,15 +61,17 @@ class ManagerAccount{
 
     async createAccount(){
         try {
-            await AccountModel.create({
+            const account = await AccountModel.create({
                 userId: this.userId,
                 accountNumber: this.accountNumber,
                 accountType: this.accountType,
                 balance: this.balance
             });
-            return "Ok"
-        } catch (error) {
-            
+            return account
+        } catch (error) {      
         }
     }
 }
+
+
+export default ManagerAccount;
